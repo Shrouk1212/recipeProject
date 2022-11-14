@@ -1,26 +1,13 @@
 package com.food.recipe.service.imp;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.List;
 import java.util.Optional;
-
-import javax.persistence.criteria.Expression;
-import javax.persistence.criteria.Join;
-import javax.persistence.criteria.ListJoin;
-import javax.persistence.criteria.Predicate;
-
-import org.springframework.data.domain.Example;
-import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
-
-import com.food.recipe.constants.enun.FilterKeys;
-import com.food.recipe.entity.IngredientEntity;
 import com.food.recipe.entity.RecipeEntity;
 import com.food.recipe.mapper.EntityMapper;
 import com.food.recipe.model.RecipeDTO;
 import com.food.recipe.model.RecipeSearchDTO;
-import com.food.recipe.model.SearchCriteria;
 import com.food.recipe.repository.IngredientRepository;
 import com.food.recipe.repository.RecipeRepository;
 import com.food.recipe.service.RecipeService;

@@ -3,18 +3,13 @@ package com.food.recipe.service.imp;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -25,10 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.data.jpa.domain.Specification;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-
-import com.food.recipe.entity.IngredientEntity;
 import com.food.recipe.entity.RecipeEntity;
 import com.food.recipe.mapper.EntityMapper;
 import com.food.recipe.model.RecipeDTO;
@@ -38,7 +29,7 @@ import com.food.recipe.service.RecipeService;
 import com.food.recipe.specification.RecipeSpecifications;
 
 import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;;
+import static org.mockito.Mockito.verify;
 
 @SpringBootTest
 public class RecipeServiceImpTest {
@@ -55,11 +46,7 @@ public class RecipeServiceImpTest {
 		
 	}
 
-    @BeforeEach
-    void initializeService() {
-    	RecipeDTO recipeDTO = new RecipeDTO();
-        // Do whatever kind of initialization the policy service requires
-    }
+ 
 	@Test
 	void whenGetRecipes_Success() {
 		

@@ -10,13 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.food.recipe.entity.RecipeEntity;
 import com.food.recipe.model.RecipeDTO;
 import com.food.recipe.model.RecipeSearchDTO;
-import com.food.recipe.model.SearchCriteria;
 import com.food.recipe.service.RecipeService;
 
 @RestController
@@ -28,7 +24,11 @@ public class RecipeController {
 		this.recipeService = recipeService;
 	}
 
-	// select all
+	/**
+	 *  Returns all the recipes
+	 * 
+	 * @return The list of recipes
+	*/
 	@GetMapping("/recipes")
 	public ResponseEntity<List<RecipeDTO>> getRecipes() {
 		try {
@@ -42,7 +42,13 @@ public class RecipeController {
 		}
 	}
 
-	// insert
+	/**
+	 *  Inserts a new recipe
+	 * 
+	 * @param recipeDTO The recipe data transfer object
+	 * 
+	 * @return the added recipe
+	*/
 	@PostMapping("add/recipe")
 	public ResponseEntity<RecipeDTO> addRecipe(@RequestBody RecipeDTO recipeDTO) {
 		RecipeDTO createdRecipeDTO = null;
@@ -54,7 +60,12 @@ public class RecipeController {
 		}
 	}
 
-	// delete by id
+	/**
+	 *  delete a recipe
+	 * 
+	 * @param id the id of the recipe that will be deleted
+	 * 
+	*/
 	@DeleteMapping("delete/recipe")
 	public ResponseEntity<HttpStatus> deleteRecipe(@RequestParam long id) {
 		try {
@@ -65,7 +76,9 @@ public class RecipeController {
 		}
 	}
 
-	// deleteAll
+	/**
+	 *  delete All recipes
+	*/
 	@DeleteMapping("delete/recipes")
 	public ResponseEntity<HttpStatus> deleteAllRecipes() {
 		try {
@@ -76,7 +89,15 @@ public class RecipeController {
 		}
 	}
 
-	// update
+	/**
+	 *  update a specific recipe
+	 * 
+	 * @param1 id 		 the id of the recipe that will be deleted
+	 * @param2 recipeDTO the new recipe DTO
+	 * 
+	 * @return the updated recipe DTO
+	 * 
+	*/
 	@PutMapping("update/recipe")
 	public ResponseEntity<RecipeDTO> updateRecipe(@RequestParam long id, @RequestBody RecipeDTO recipeDTO) {
 		try {
@@ -91,6 +112,20 @@ public class RecipeController {
 		}
 	}
 
+
+	/**
+	 * Filters and returns the recipes based on the params provided
+	 * 
+	 * if the user wants to filter on specific recipe, the user may provide list of rules 
+	 * if the user wants to include some ingredients the filter key should be ingredients, the operator should be equal and provide a list of ingredients in values array
+	 * if the user wants to exclude some ingredients the filter key should be ingredients, the operator should be not-equal and provide list of ingredient in values array
+	 * if the user wants to search for a word the key should be instructions and the operator should be equal and provide the word in value and provide the type of the value which is string
+	 * 
+	 * @param recipeSearchDto the roles of filtering
+	 * 
+	 * @return the filtered recipes
+	 * 
+	*/
 	@PostMapping("search/recipes")
 	public ResponseEntity<List<RecipeDTO>> getfilteredRecipes(@RequestBody RecipeSearchDTO recipeSearchDto) {
 		try {
