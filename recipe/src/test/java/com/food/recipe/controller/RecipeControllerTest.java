@@ -5,7 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatcher;
@@ -103,8 +105,7 @@ public class RecipeControllerTest {
 		recipeDto.setNumberOfServings(5);
 		recipeDto.setVegetarian(false);
 		recipeDto.setInstructions("put the ingrediants, put the pizza in oven");
-		List<IngredientEntity> ingredientList = Arrays.asList(new IngredientEntity("corn" ),
-				new IngredientEntity("onion"));
+		Set<IngredientDTO> ingredientList= new HashSet<>();
 		recipeDto.setIngredients(ingredientList);
 		when(recipeService.addRecipe(ArgumentMatchers.any())).thenReturn(recipeDto);
 

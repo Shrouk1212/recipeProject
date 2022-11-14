@@ -86,7 +86,7 @@ public class RecipeControllerIT {
 
 		HttpEntity<String> entity = new HttpEntity<String>(null, null);
 
-		ResponseEntity<String> response = restTemplate.exchange(createURLWithPort("delete/recipes"), HttpMethod.DELETE,
+		ResponseEntity<String> response = restTemplate.exchange(createURLWithPort("/delete/recipes"), HttpMethod.DELETE,
 				entity, String.class);
 
 		Assertions.assertThat(response.getStatusCodeValue()).isEqualTo(HttpStatus.OK.value());

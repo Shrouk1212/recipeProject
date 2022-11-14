@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Stream;
-
+import org.mockito.Mockito;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -70,19 +70,27 @@ public class RecipeServiceImpTest {
 	
 	@ParameterizedTest
 	@MethodSource("generatRecipeDTOData")
-	void addRecipe_Success(RecipeDTO recipeDTO) {
+	void addRecipe_whenRecipeExistsSuccess(RecipeDTO recipeDTO) {
 		RecipeEntity recipeEntity = new RecipeEntity();
+		recipeEntity.setRecipeName("Pasta");
 		RecipeDTO updatedrecipeDto = new RecipeDTO();
 		updatedrecipeDto.setRecipeName("Pasta");
-		when(entityMapper.recipeDTOtoEntity(ArgumentMatchers.any())).thenReturn(recipeEntity);
-		when(recipeRepository.saveAndFlush(ArgumentMatchers.any())).thenReturn(recipeEntity);
-		when(entityMapper.recipeEntitytoDTO(ArgumentMatchers.any())).thenReturn(updatedrecipeDto);
-
+	
+		Optional<RecipeEntity> recipeEntityOptional = Optional.of(recipeEntity);
+		when(recipeRepository.findByRecipeName(ArgumentMatchers.any())).thenReturn(recipeEntityOptional );
+//		when(recipeRepository.saveAndFlush(ArgumentMatchers.any())).thenReturn(recipeEntityOptional);
+//		when(recipeRepository.insertRecipeIngredientIds(ArgumentMatchers.any(), ArgumentMatchers.anyLong())).thenReturn(1);
+//		 when(recipeRepository.findById(ArgumentMatchers.anyLong())).thenReturn(recipeEntityOptional);
+//		 when(entityMapper.recipeEntitytoDTO(ArgumentMatchers.any())).thenReturn(updatedrecipeDto);
+		 
 		 updatedrecipeDto = recipeServiceImp.addRecipe(recipeDTO);
-		 Assertions.assertThat(updatedrecipeDto.getRecipeName()).isEqualTo(recipeDTO.getRecipeName());
+	     verify(recipeRepository, times(1)).findByRecipeName(ArgumentMatchers.anyString());
+	     
 
 	}
 	
+	
+
 	private static Stream<Arguments> generatRecipeDTOData() {
 		RecipeDTO recipeDTO = new RecipeDTO();
 		recipeDTO.setRecipeName("Pasta");

@@ -1,8 +1,11 @@
 package com.food.recipe.model;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 import com.food.recipe.entity.IngredientEntity;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,10 +20,10 @@ public class RecipeDTO {
 	private String instructions;
 	private int numberOfServings;
 	private boolean vegetarian;
-	private List<IngredientEntity> ingredients;
+	private Set<IngredientDTO> ingredients = new HashSet<>();
 	
 	public RecipeDTO( String recipeName, String instructions, int numberOfServings, boolean vegetarian,
-			List<IngredientEntity> ingredients) {
+			Set<IngredientDTO> ingredients) {
 		super();
 		this.recipeName = recipeName;
 		this.instructions = instructions;

@@ -4,10 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import org.assertj.core.api.Assertions;
+import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -17,7 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 
+import com.food.recipe.entity.IngredientEntity;
 import com.food.recipe.entity.RecipeEntity;
+import com.food.recipe.model.IngredientDTO;
 import com.food.recipe.model.RecipeDTO;
 
 @SpringBootTest
@@ -46,7 +51,10 @@ public class MapperTest {
 		recipeEntity.setRecipeName("Pasta");
 		recipeEntity.setInstructions("put pasta and tomato, boil them together");
 		recipeEntity.setNumberOfServings(1);
-		
+		IngredientEntity ingredientEntity = new IngredientEntity();
+		List<IngredientEntity> ingredientEntityList = new ArrayList<>();
+		ingredientEntityList.add(ingredientEntity);
+		recipeEntity.setIngredients(ingredientEntityList);
 		
 		List<RecipeEntity> recipeEntityList = new ArrayList<>();
 		recipeEntityList.add(recipeEntity);
@@ -72,6 +80,8 @@ public class MapperTest {
 		recipeDTO.setRecipeName("Pasta");
 		recipeDTO.setInstructions("put pasta and tomato, boil them together");
 		recipeDTO.setNumberOfServings(1);
+		Set<IngredientDTO> ingredientDTOList = new HashSet<>();
+		recipeDTO.setIngredients(ingredientDTOList);
 	    return Stream.of(
 	        Arguments.of(recipeDTO)
 	    );
@@ -90,6 +100,8 @@ public class MapperTest {
 		recipeEntity.setRecipeName("Pasta");
 		recipeEntity.setInstructions("put pasta and tomato, boil them together");
 		recipeEntity.setNumberOfServings(1);
+//		List<IngredientEntity> ingredientEntityList = new ArrayList<>();
+//		recipeEntity.setIngredients(ingredientEntityList);
 	    return Stream.of(
 	        Arguments.of(recipeEntity)
 	    );

@@ -35,7 +35,7 @@ public class RecipeEntity {
 	private String instructions;
 	private Integer numberOfServings;
 	private boolean vegetarian;
-	@ManyToMany(cascade = {CascadeType.ALL})
+	@ManyToMany(cascade = { CascadeType.ALL})
 	@JoinTable(
 	  name = "recipe_ingredient", 
 	  joinColumns = @JoinColumn(name = "recipe_id"), 
