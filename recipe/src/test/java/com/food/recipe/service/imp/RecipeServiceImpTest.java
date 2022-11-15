@@ -70,7 +70,7 @@ public class RecipeServiceImpTest {
 	
 	@ParameterizedTest
 	@MethodSource("generatRecipeDTOData")
-	void addRecipe_whenRecipeExistsSuccess(RecipeDTO recipeDTO) {
+	void addRecipe_Success(RecipeDTO recipeDTO) {
 		RecipeEntity recipeEntity = new RecipeEntity();
 		recipeEntity.setRecipeName("Pasta");
 		RecipeDTO updatedrecipeDto = new RecipeDTO();
@@ -78,11 +78,6 @@ public class RecipeServiceImpTest {
 	
 		Optional<RecipeEntity> recipeEntityOptional = Optional.of(recipeEntity);
 		when(recipeRepository.findByRecipeName(ArgumentMatchers.any())).thenReturn(recipeEntityOptional );
-//		when(recipeRepository.saveAndFlush(ArgumentMatchers.any())).thenReturn(recipeEntityOptional);
-//		when(recipeRepository.insertRecipeIngredientIds(ArgumentMatchers.any(), ArgumentMatchers.anyLong())).thenReturn(1);
-//		 when(recipeRepository.findById(ArgumentMatchers.anyLong())).thenReturn(recipeEntityOptional);
-//		 when(entityMapper.recipeEntitytoDTO(ArgumentMatchers.any())).thenReturn(updatedrecipeDto);
-		 
 		 updatedrecipeDto = recipeServiceImp.addRecipe(recipeDTO);
 	     verify(recipeRepository, times(1)).findByRecipeName(ArgumentMatchers.anyString());
 	     
